@@ -21,14 +21,19 @@ app.use(session({
     saveUninitialized:true,
 }))
 
-// const connectionParams={
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true 
-// }
+const connectionParams={
+    useNewUrlParser: true,
+    
+    useUnifiedTopology: true, 
+
+   
+    serverSelectionTimeoutMS: 30000 
+
+  
+}
 
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@atlascluster.8tdja.mongodb.net/webhub?retryWrites=true&w=majority`
-)
+,connectionParams)
         .then(()=>console.log("mongodb connected"))
         .catch(err=>console.log("error in connecting mongodb",err))
 
