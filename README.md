@@ -1,6 +1,3 @@
-Here's a template for a README file for your website API that categorizes websites by various sectors (e.g., education, government, technology), providing URLs and descriptions for each website.
-
----
 
 # Website Categorization API
 
