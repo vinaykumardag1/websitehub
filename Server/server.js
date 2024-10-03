@@ -1,9 +1,9 @@
-
+require("dotenv").config()
 const express=require("express")
 const mongoose=require("mongoose")
 const ejs=require("ejs")
 const cors=require("cors")
-const User=require('./models/User')
+
 const auth=require("./controllers/auth")
 const admin=require("./controllers/admin")
 const apis=require("./controllers/api")
