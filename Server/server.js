@@ -44,8 +44,8 @@ app.use(express.json());
 
 app.set("view engine","ejs")
 app.set("views","views")
-
-app.get("/",(req,res)=>{
+app.get('express works')
+app.get("/login",(req,res)=>{
     res.render("login")
 })
 app.get("/admin",auth.noCache,auth.getAdmin)
