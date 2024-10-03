@@ -38,6 +38,9 @@ mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MO
         .catch(err=>console.log("error in connecting mongodb",err))
 
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 app.set("view engine","ejs")
 app.set("views","views")
@@ -52,6 +55,15 @@ app.get("/api/:category",apis.api_category);
 app.post("/",auth.login)
 
 
+process.on('unhandledRejection', (err) => {
+    console.error('Unhandled rejection:', err);
+    process.exit(1);
+});
+
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught exception:', err);
+    process.exit(1);
+});
 
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`)
