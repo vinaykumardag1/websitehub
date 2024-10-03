@@ -44,7 +44,9 @@ app.use(express.json());
 
 app.set("view engine","ejs")
 app.set("views","views")
-app.get('express works')
+app.get(("/"),(req,res)=>{
+    res.send('express works')
+})
 app.get("/login",(req,res)=>{
     res.render("login")
 })
