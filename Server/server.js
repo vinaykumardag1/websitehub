@@ -23,7 +23,7 @@ app.use(session({
 
 
 
-mongoose.connect(`mongodb+srv://vinaykumardag1:${process.env.MONGODB_PASSWORD}@atlascluster.8tdja.mongodb.net/?retryWrites=true&w=majority&webhub=AtlasCluster`)
+mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@atlascluster.8tdja.mongodb.net/webhub?retryWrites=true&w=majority`)
         .then(()=>console.log("mongodb connected"))
         .catch(err=>console.log("error in connecting mongodb",err))
 
