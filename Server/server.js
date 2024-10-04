@@ -21,19 +21,9 @@ app.use(session({
     saveUninitialized:true,
 }))
 
-const connectionParams={
 
 
-    useNewUrlParser: true,
-    
-    useUnifiedTopology: true, 
-    serverSelectionTimeoutMS: 30000 
-
-  
-}
-
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@atlascluster.8tdja.mongodb.net/webhub?retryWrites=true&w=majority`
-,connectionParams)
+mongoose.connect(`mongodb+srv://vinaykumardag1:${process.env.MONGODB_PASSWORD}@atlascluster.8tdja.mongodb.net/?retryWrites=true&w=majority&webhub=AtlasCluster`)
         .then(()=>console.log("mongodb connected"))
         .catch(err=>console.log("error in connecting mongodb",err))
 
