@@ -1,3 +1,4 @@
+require("dotenv").config()
 
 module.exports.login=(req,res)=>{
     const username=req.body.username

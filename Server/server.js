@@ -1,4 +1,4 @@
-
+require("dotenv").config()
 const express = require("express");
 const mongoose = require("mongoose");
 const ejs = require("ejs");
@@ -29,16 +29,18 @@ const connectWithRetry = () => {
       `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@atlascluster.mongodb.net/webhub?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
+
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 30000, // Timeout of 30 seconds
       }
+     
     )
     .then(() => {
       console.log("MongoDB connected successfully");
     })
     .catch((err) => {
       console.error("Error in connecting MongoDB, retrying in 5 seconds...", err);
-      setTimeout(connectWithRetry, 5000); // Retry after 5 seconds
+   
     });
 };
 
@@ -55,20 +57,12 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
     res.render("login");
 });
-app.get("/admin", auth.noCache, auth.getAdmin);
+
 app.post("/admin", admin.admin);
 app.get("/api", apis.api);
 app.get("/api/:category", apis.api_category);
 app.post("/login", auth.login);
 
-process.on("unhandledRejection", (err) => {
-    console.error("Unhandled rejection:", err);
-    process.exit(1);
-});
-process.on("uncaughtException", (err) => {
-    console.error("Uncaught exception:", err);
-    process.exit(1);
-});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
