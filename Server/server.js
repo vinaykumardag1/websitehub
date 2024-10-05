@@ -16,7 +16,7 @@ app.use(cors())
 
 
 
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@db:27017/webhub?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@atlascluster.8tdja.mongodb.net/webhub?retryWrites=true&w=majority`)
         .then(()=>console.log("mongodb connected"))
         .catch(err=>console.log("error in connecting mongodb",err))
 
