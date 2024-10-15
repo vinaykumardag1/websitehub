@@ -18,3 +18,12 @@ module.exports.api_category = async (req, res) => {
         res.status(500).send({ message: "Error fetching data by category", error });
     }
 };
+// module.exports.api_limit=async(req,res)=>{
+//     const limit = parseInt(req.body.limit) || 10;
+//   try {
+//     const products = await User.find().limit(limit);
+//     res.json(products);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// }

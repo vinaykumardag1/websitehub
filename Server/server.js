@@ -16,9 +16,11 @@ app.use(cors())
 
 
 
+
+
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@atlascluster.8tdja.mongodb.net/webhub?retryWrites=true&w=majority`)
         .then(()=>console.log("mongodb connected"))
-        .catch(err=>console.log("error in connecting mongodb",err))
+        .catch(err=>console.log("error in connecting mongodb",err));
 
 
 app.use(bodyParser.urlencoded({extended:true}))
@@ -29,7 +31,7 @@ app.use(express.json());
 app.set("view engine","ejs")
 app.set("views","views")
 app.get(("/"),(req,res)=>{
-    res.send('express works')
+    res.render("dashboard")
 })
 app.get("/login",(req,res)=>{
     res.render("login")
@@ -38,6 +40,7 @@ app.get("/login",(req,res)=>{
 app.post('/admin',admin.admin);
 app.get("/api",apis.api)
 app.get("/api/:category",apis.api_category);
+
 app.post("/login",auth.login)
 
 
