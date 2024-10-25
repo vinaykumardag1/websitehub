@@ -62,7 +62,7 @@ const CategorySelector = () => {
       
       <div>
         {apiData.length > 0 ? (
-          <div className="grid gap-9 grid-cols-3">
+          <div className="grid gap-9 grid-cols-3 ">
             {apiData.map((item, index) => (
              <Card item={item} index={index}/>
             ))}
