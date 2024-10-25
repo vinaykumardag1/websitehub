@@ -1,34 +1,82 @@
-import React, { useEffect, useState } from 'react'
-import { api_category } from '../services/apis'
-import {useParams} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Card from "./Card";
+import Navbar from "../Navbar";
+import Footer from "./Footer";
 
-const product = () => {
-  const {categories}=useParams()
-  const [data,setData]=useState([])
-  useEffect(()=>{
-    const getData=async ()=>{
-      const api_id=await api_category()
-      setData(api_id)
+const API_URL = `https://websitehub-vki3.onrender.com/api`;
+
+const CategorySelector = () => {
+  const [category, setCategory] = useState(""); // Stores selected category
+  const [apiData, setApiData] = useState([]); // Stores API data
+  const [error, setError] = useState(""); // Error handling
+
+ 
+  useEffect(() => {
+    if (category) {
+      const fetchCategoryData = async () => {
+        try {
+          const response = await axios.get(`${API_URL}/${category}`);
+          setApiData(response.data);
+          
+        } catch (error) {
+          setError("Error fetching data by category");
+          console.error("Error fetching data:", error);
+        }
+      };
+
+      fetchCategoryData();
     }
-    getData()
-  },[categories])
-  
-  return (
-    <div>
-      {data.map((item)=>{
-        <div>
-        <ul key={item.id}>
-          <li>{item.name}</li>
-        <a href={item.url}><li>{item.name}.com</li></a>
-          <li>{item.desc}</li>
-          <li>{item.category}</li>
-        </ul>
-        
-        </div>
-        
-      })}
-    </div>
-  )
-}
+  }, [category]); 
 
-export default product
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+
+  return (
+    <>
+        <Navbar/>
+    <div className="container mx-auto">
+     
+      <h1 className="text-red-700 text-3xl">Select a Category</h1>
+      <div className="flex justify-center py-6">
+        <select onChange={handleCategoryChange} className="p-4 my-7 rounded-xl ">
+                   <option value="">-Select Category-</option>
+                    <option value="education">Education</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="technology">Technology</option>
+                    <option value="health">Health</option>
+                    <option value="ai">Aritificial Intellegence</option>
+                    <option value="coding">Coding</option>
+                    <option value="editing">Editing</option>
+                    <option value="socialmedia">Social Media</option>
+                    <option value="news">News</option>
+                    <option value="travel">Travel</option>
+                    <option value="government">Government</option>
+                    <option value="course">Course</option>
+                    <option value="e_commerce">Ecommerce</option>
+                    <option value="others">Other</option>
+              </select>
+        </div>
+      {error && <p>{error}</p>}
+      
+      <div>
+        {apiData.length > 0 ? (
+          <div className="grid gap-9 grid-cols-3">
+            {apiData.map((item, index) => (
+             <Card item={item} index={index}/>
+            ))}
+          </div>
+        ) : (
+          <div className="py-12 text-center text-4xl text-yellow-600">
+           Data is not availbale in this category 
+          </div>
+        )}
+      </div>
+    </div>
+    <Footer/>
+    </>
+  );
+};
+
+export default CategorySelector;

@@ -1,9 +1,11 @@
-import axios from "axios";
 
-const API_URL = `http://localhost:4000/api`;
+import React, { useEffect } from 'react'
+import axios from "axios";
+const API_URL = `https://websitehub-vki3.onrender.com/api`;
 
 
 export const webhubapi = async () => {
+  
     try {
       const response = await fetch(API_URL);
       if(!response.ok){
@@ -17,16 +19,4 @@ export const webhubapi = async () => {
     }
   };
 
-  
-export  const api_category = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/:${category}`);
-      setApiData(response.data);  
-      console.log(response.data);
-    } catch (error) {
-      setError("Error fetching data by category");
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  
+ 

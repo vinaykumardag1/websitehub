@@ -1,10 +1,11 @@
 import React from 'react'
+import Navbar from '../Navbar'
 
 const About = () => {
   return (
-    <div>
-      this about section
-    </div>
+    <>
+      <Navbar/>
+    </>
   )
 }
 
