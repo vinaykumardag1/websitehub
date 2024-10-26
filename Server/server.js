@@ -30,7 +30,7 @@ app.use(express.json());
 
 app.set("view engine","ejs")
 app.set("views","views")
-app.get(("/"),(req,res)=>{
+app.get("/",(req,res)=>{
     res.render("dashboard")
 })
 app.get("/login",(req,res)=>{
