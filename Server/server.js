@@ -36,7 +36,9 @@ app.get(("/"),(req,res)=>{
 app.get("/login",(req,res)=>{
     res.render("login")
 })
-
+app.get("/admin",(req,res)=>{
+    res.render('admin')
+})
 app.post('/admin',admin.admin);
 app.get("/api",apis.api)
 app.get("/api/:category",apis.api_category);
