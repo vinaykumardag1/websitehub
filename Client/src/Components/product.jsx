@@ -3,6 +3,7 @@ import axios from "axios";
 import Card from "./Card";
 import Navbar from "../Navbar";
 import Footer from "./Footer";
+import Loading from "./Loading";
 
 const API_URL = `https://websitehub-vki3.onrender.com/api`;
 
@@ -28,6 +29,9 @@ const CategorySelector = () => {
       fetchCategoryData();
     }
   }, [category]); 
+  if (!apiData) {
+    return <Loading/>
+  }
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
