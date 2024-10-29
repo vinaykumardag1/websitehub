@@ -22,8 +22,8 @@ const Home_data = () => {
     <div>
       <div className='w-full grid gap-9 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1'>
         {webhub.length > 0 ? (
-          webhub.map((item) => (
-            <Card item={item}/>
+          webhub.map((item,index) => (
+            <Card item={item} index={index} />
           ))
         ) : (
           <Loading/>
