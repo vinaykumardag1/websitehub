@@ -42,7 +42,7 @@ const CategorySelector = () => {
         <Navbar/>
     <div className="container mx-auto">
      
-      <h1 className="text-red-700 text-3xl">Select a Category</h1>
+      <h1 className="text-red-700 text-3xl text-center">Select a Category</h1>
       <div className="flex justify-center py-6">
         <select onChange={handleCategoryChange} className="p-4 my-7 rounded-xl ">
                    <option value="">-Select Category-</option>
