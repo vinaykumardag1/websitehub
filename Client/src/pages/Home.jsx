@@ -10,10 +10,10 @@ const Home = () => {
   return (
     <>
     <Navbar/>   
-    <div className='container mx-auto '>
+    
      
      <Home_data/>
-    </div>
+    
     <Footer/>
     </>
   );

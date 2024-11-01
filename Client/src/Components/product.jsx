@@ -4,6 +4,7 @@ import Card from "./Card";
 import Navbar from "../Navbar";
 import Footer from "./Footer";
 import Loading from "./Loading";
+import { Container } from "@mui/material";
 
 const API_URL = `https://websitehub-vki3.onrender.com/api`;
 
@@ -40,7 +41,8 @@ const CategorySelector = () => {
   return (
     <>
         <Navbar/>
-    <div className="container mx-auto">
+        <Container>
+    
      
       <h1 className="text-red-700 text-3xl text-center">Select a Category</h1>
       <div className="flex justify-center py-6">
@@ -66,7 +68,7 @@ const CategorySelector = () => {
       
       <div>
         {apiData.length > 0 ? (
-          <div className="grid gap-9 grid-cols-3 ">
+          <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
             {apiData.map((item,index) => (
              <Card item={item} key={index}/>
             ))}
@@ -77,7 +79,8 @@ const CategorySelector = () => {
           </div>
         )}
       </div>
-    </div>
+   
+    </Container>
     <Footer/>
     </>
   );

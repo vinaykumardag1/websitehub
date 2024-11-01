@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import { webhubapi } from '../services/apis';
 import Loading from './Loading';
+import { Container } from '@mui/material';
 
 const Home_data = () => {
   const [webhub, setWebhub] = useState([]);
@@ -19,8 +20,10 @@ const Home_data = () => {
   }
 
   return (
-    <div>
-      <div className='w-full grid gap-9 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1'>
+
+    <>
+    <Container  className='py-10'>
+      <div className='w-full grid gap-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1'>
         {webhub.length > 0 ? (
           webhub.map((item,index) => (
             <Card item={item} index={index} />
@@ -29,7 +32,8 @@ const Home_data = () => {
           <Loading/>
         )}
       </div>
-    </div>
+      </Container>
+    </>
   );
 }
 

@@ -2,11 +2,12 @@ import React from 'react'
 import Navbar from '../Navbar'
 
 import about_img1 from '../assets/images/about_image.webp'
+import { Container } from '@mui/material'
 const About = () => {
   return (
     <>
       <Navbar/>
-      <div className="container mx-auto">
+      <Container>
         <div className='px-6 flex  gap-5 flex-col-reverse  md:flex-row py-10'>
           <div className='text-sm md:text-xl flex items-center '>
             <div>
@@ -16,7 +17,7 @@ const About = () => {
           </div>
           <img src={about_img1} alt='Image' className='md:w-1/3'/>
         </div>
-      </div>
+      </Container>
     </>
   )
 }
