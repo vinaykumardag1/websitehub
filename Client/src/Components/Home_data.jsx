@@ -3,6 +3,7 @@ import Card from './Card';
 import { webhubapi } from '../services/apis';
 import Loading from './Loading';
 import { Container } from '@mui/material';
+import ScrollToTop from './ToptoScroll';
 
 const Home_data = () => {
   const [webhub, setWebhub] = useState([]);
@@ -33,6 +34,7 @@ const Home_data = () => {
         )}
       </div>
       </Container>
+      <ScrollToTop/>
     </>
   );
 }

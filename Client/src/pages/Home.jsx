@@ -3,7 +3,7 @@ import Navbar from '../Navbar'
 
 import Home_data from '../Components/Home_data';
 import Footer from '../Components/Footer';
-
+import ScrollToTop from '../Components/ToptoScroll'
 const Home = () => {
   
 
@@ -15,6 +15,7 @@ const Home = () => {
      <Home_data/>
     
     <Footer/>
+    
     </>
   );
 };
