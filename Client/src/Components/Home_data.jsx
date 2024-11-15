@@ -4,6 +4,7 @@ import { webhubapi } from '../services/apis';
 import Loading from './Loading';
 import { Container } from '@mui/material';
 import ScrollToTop from './ToptoScroll';
+import noresults from '../assets/images/idonthaveit.gif'
 
 const Home_data = () => {
   const [webhub, setWebhub] = useState([]);
@@ -38,9 +39,7 @@ const Home_data = () => {
     return <Loading />;
   }
 
-  if (!webhub.length) {
-    return <p>data unavailable now</p>;
-  }
+
 
   return (
     <>
@@ -59,7 +58,7 @@ const Home_data = () => {
           {filteredData.length > 0 ? (
             filteredData.map((item, index) => <Card key={index} item={item} />)
           ) : (
-           <p>NO data available</p>
+           <img src={noresults} alt='no results available' />
           )}
         </div>
       </Container>
