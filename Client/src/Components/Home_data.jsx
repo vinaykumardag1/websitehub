@@ -39,7 +39,7 @@ const Home_data = () => {
   }
 
   if (!webhub.length) {
-    return <p>No data available now</p>;
+    return <p>data unavailable now</p>;
   }
 
   return (
