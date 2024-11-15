@@ -21,7 +21,8 @@ const Navbar = () => {
           </a> 
           WebSiteHub
         </h1>
-
+        {/*  */}
+       
         {/* Navbar Links for Desktop */}
         <ul className="hidden md:flex gap-5">
           <li className={linkStyle}>
