@@ -29,7 +29,7 @@ const Home_data = () => {
 
     // Filter data based on the search query
     const filtered = webhub.filter((item) =>
-      item.name.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query)
+      item.name.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query) || item.category.toLowerCase().includes(query)
      
     );
     setFilteredData(filtered);
