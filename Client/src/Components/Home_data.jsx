@@ -17,7 +17,7 @@ const Home_data = () => {
       setLoading(true);
       const productsData = await webhubapi();
       setWebhub(productsData);
-      setFilteredData(productsData); // Set filtered data initially to full data
+      setFilteredData(productsData); 
       setLoading(false);
     };
     getData();

@@ -17,6 +17,7 @@ const Footer = () => {
         <li><a href="https://github.com/vinaykumardag1"><FaGithub/></a></li>
       </ul>
      </div>
+     <p>© 2024 Daggupati Vinay. All rights reserved.</p>
     </Container>
   )
 }
