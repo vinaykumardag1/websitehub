@@ -23,7 +23,7 @@ exports.login = (req, res) => {
         res.cookie("authToken", token, {
             httpOnly: true, // Secure against XSS attacks
             sameSite: "strict", // Prevent CSRF
-            maxAge: 60 * 60 * 1000, // 1 hour
+            maxAge: 60 * 60 * 1000, 
             secure: process.env.NODE_ENV === "production", // Only set secure cookie in production
         });
 
