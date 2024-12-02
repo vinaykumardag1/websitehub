@@ -38,7 +38,7 @@ app.get("/api",apis.api)
 app.get("/api/:category",apis.api_category);
 
 app.post("/login",auth.login)
-
+app.post("/logout",auth.logout)
 
 
 app.listen(PORT,()=>{

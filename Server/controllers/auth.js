@@ -21,7 +21,6 @@ exports.login = (req, res) => {
         // Set the token as a cookie
         res.cookie("authToken", token, {
             httpOnly: true, // Secure against XSS attacks
-            secure: process.env.NODE_ENV === "production", // Use secure cookies in production
             sameSite: "strict", // Prevent CSRF
             maxAge: 60 * 60 * 1000, // 1 hour
         });
@@ -37,3 +36,14 @@ exports.login = (req, res) => {
         res.status(500).send("An error occurred during login.");
     }
 };
+exports.logout = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Logout error:", err);
+            return res.status(500).send("Could not log out.");
+        }
+        res.clearCookie("connect.sid"); // Clear the session cookie
+        res.redirect("/login");
+    });
+};
+
