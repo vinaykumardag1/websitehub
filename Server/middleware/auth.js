@@ -5,17 +5,18 @@ exports.authenticate = (req, res, next) => {
     const token = req.cookies?.authToken; // Check if token exists in cookies
 
     if (!token) {
-        console.log("No token found. Redirecting to login.");
+       alert("No token found. Redirecting to login.");
         setNoCacheHeaders(res);
         return res.redirect("/login"); // Redirect to login if no token
     }
 
     try {
         // Verify the JWT token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || "fallback_secret");
 
         // Attach the user information to the request object
         req.user = decoded; // Store decoded payload under req.user
+
 
         // Set no-cache headers to prevent caching of authenticated responses
         setNoCacheHeaders(res);

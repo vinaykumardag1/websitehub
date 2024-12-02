@@ -1,5 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const session = require("express-session");
 
 exports.login = (req, res) => {
     try {
@@ -23,6 +24,7 @@ exports.login = (req, res) => {
             httpOnly: true, // Secure against XSS attacks
             sameSite: "strict", // Prevent CSRF
             maxAge: 60 * 60 * 1000, // 1 hour
+            secure: process.env.NODE_ENV === "production", // Only set secure cookie in production
         });
 
         // Initialize session
@@ -36,6 +38,7 @@ exports.login = (req, res) => {
         res.status(500).send("An error occurred during login.");
     }
 };
+
 exports.logout = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -43,7 +46,7 @@ exports.logout = (req, res) => {
             return res.status(500).send("Could not log out.");
         }
         res.clearCookie("connect.sid"); // Clear the session cookie
+        res.clearCookie("authToken"); // Clear the authToken cookie
         res.redirect("/login");
     });
 };
-
