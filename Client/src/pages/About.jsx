@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../Navbar'
 import Footer from '../Components/Footer'
 import about_img1 from '../assets/images/about_image.webp'
-
+import { Container } from '@mui/material'
 const About = () => {
   return (
     <>
