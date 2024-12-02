@@ -7,6 +7,7 @@ const admin=require("./controllers/admin")
 const apis=require("./controllers/api")
 const {authenticate}=require("./middleware/auth")
 const app=express()
+const session=require("express-session")
 const bodyParser=require("body-parser")
 const CookieParser=require('cookie-parser')
 const PORT=process.env.PORT || 4000
@@ -18,10 +19,9 @@ mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MO
 
 
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(CookieParser())
-
+app.use(session({secret: process.env.SESSIONS_KEY,cookie:{maxAge:3000}, resave: true, saveUninitialized: true}))
+app.use(CookieParser());
+// 
 app.set("view engine","ejs")
 app.set("views","views")
 app.get("/",(req,res)=>{

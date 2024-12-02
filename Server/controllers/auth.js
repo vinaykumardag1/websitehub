@@ -1,29 +1,39 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-module.exports.login = (req, res) => {
-    const { username, password } = req.body;
+exports.login = (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-    // Validate credentials
-    if (process.env.LOGIN_USERNAME !== username || process.env.LOGIN_PASSWORD !== password) {
-        return res.status(400).send("Wrong credentials");
+        // Validate credentials
+        if (process.env.LOGIN_USERNAME !== username || process.env.LOGIN_PASSWORD !== password) {
+            console.log("Invalid credentials provided.");
+            return res.status(400).send("Invalid username or password");
+        }
+
+        // Generate a JWT token
+        const token = jwt.sign(
+            { username }, // Include any additional claims if required
+            process.env.JWT_SECRET || "fallback_secret",
+            { expiresIn: "1h" } // Token expires in 1 hour
+        );
+
+        // Set the token as a cookie
+        res.cookie("authToken", token, {
+            httpOnly: true, // Secure against XSS attacks
+            secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+            sameSite: "strict", // Prevent CSRF
+            maxAge: 60 * 60 * 1000, // 1 hour
+        });
+
+        // Initialize session
+        req.session.user = { username }; // Store user info in the session
+        console.log("User logged in successfully. Redirecting to /admin.");
+        
+        // Redirect to admin dashboard
+        res.redirect("/admin");
+    } catch (error) {
+        console.error("Error during login:", error);
+        res.status(500).send("An error occurred during login.");
     }
-
-    // Generate JWT token
-    const token = jwt.sign(
-        { username }, // Payload (add more claims if needed)
-        process.env.JWT_SECRET, // Secret key
-        { expiresIn: "1h" } // Token expiration
-    );
-
-    // Set the token as a cookie
-    res.cookie("authToken", token, {
-        httpOnly: true, // Protect against XSS
-        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-        sameSite: "strict", // Prevent CSRF
-        maxAge: 60 * 60 * 1000, // 1 hour in milliseconds
-    });
-
-    // Redirect to the admin page
-    res.redirect("/admin");
 };
