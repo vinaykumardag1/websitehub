@@ -29,12 +29,12 @@ exports.login = (req, res) => {
 
         // Initialize session
         req.session.user = { username }; // Store user info in the session
-        console.log("User logged in successfully. Redirecting to /admin.");
+      
         
         // Redirect to admin dashboard
         res.redirect("/admin");
     } catch (error) {
-        console.error("Error during login:", error);
+       
         res.status(500).send("An error occurred during login.");
     }
 };
