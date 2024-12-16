@@ -9,6 +9,13 @@ const Card = ({ item, index }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const { isAuthenticated } = useAuth(); // Get authentication status from context
   const [isChecked, setIsChecked] = useState(false);
+  const [isUserExists, setIsUserExists] = useState(false); // State to track user existence
+
+  // Check if userId exists in local storage
+  useEffect(() => {
+    const user = localStorage.getItem('userId');
+    setIsUserExists(!!user); // Set to true if user exists, false otherwise
+  }, []);
 
   // Load initial state from local storage
   useEffect(() => {
@@ -39,12 +46,7 @@ const Card = ({ item, index }) => {
     // Update local storage
     localStorage.setItem('checkedItems', JSON.stringify(updatedState));
     setIsChecked(!isChecked);
-    // let user=localStorage.getItem('userId')
-    // if(user){
-    //    setIsChecked(isChecked);
-    // }else{
-    //    setIsChecked(!isChecked);
-    // }
+ 
   };
 
   return (
@@ -61,7 +63,7 @@ const Card = ({ item, index }) => {
             checkedIcon={<Favorite />}
             checked={isChecked}
             onChange={handleCheckboxChange}
-            disabled={!isAuthenticated} // Disable checkbox if user is not authenticated
+            disabled={!isAuthenticated || !isUserExists} // Disable if user isn't authenticated or doesn't exist
             title='Add to favourite'
           />
         </li>
