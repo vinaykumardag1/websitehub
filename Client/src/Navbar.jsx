@@ -50,16 +50,19 @@ const Navbar = () => {
   const linkStyle = 'ease duration-100 hover:text-blue-300 hover:border-b-2 hover:border-red-900';
 
   const renderAuthButtons = () => (
-    <> <div className="flex gap-3 items-center">
+    <> 
+    <div className="flex gap-3 items-center">
       <IconButton onClick={handleMenuClick}>
         <MoreVertIcon />
       </IconButton>
+      <Menu  anchorEl={anchorEl} open={open} onClose={handleMenuClose} TransitionComponent={Fade}>
     <MenuItem>
     <Link to="/login" className="px-4 py-2 rounded-2xl bg-[#1099d3] text-white">Login</Link>
   </MenuItem>
   <MenuItem>
     <Link to="/register" className="px-4 py-2 rounded-2xl bg-blue-800 text-white">Register</Link>
   </MenuItem>
+  </Menu>
   </div>
 </>
   );
