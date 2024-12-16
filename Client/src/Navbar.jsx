@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Logout from '@mui/icons-material/Logout';
 import logo_icon from './assets/images/logo.svg';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import {API_URL} from './services/apis'
 
 import Badge from '@mui/material/Badge';
 const Navbar = () => {
@@ -20,7 +21,7 @@ const Navbar = () => {
       const userId = localStorage.getItem('userId');
       if (userId) {
         try {
-          const { data } = await axios.get(`http://localhost:4000/api/userdetails/${userId}`);
+          const { data } = await axios.get(`${API_URL}/userdetails/${userId}`);
           setUser(data);
         } catch (error) {
           console.error('Error fetching user:', error);
