@@ -53,6 +53,7 @@ const Card = ({ item, index }) => {
             checked={isChecked}
             onChange={handleCheckboxChange}
             disabled={!isAuthenticated} // Disable checkbox if user is not authenticated
+            title='Add to favourite'
           />
         </li>
         <a href={`${item.url}`} target="_blank" rel="noopener noreferrer">

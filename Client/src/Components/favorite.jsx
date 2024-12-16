@@ -3,6 +3,7 @@ import Navbar from '../Navbar';
 import Card from './Card'; 
 import axios from 'axios';
 import { Container } from '@mui/material';
+import { API_URL } from '../services/apis';
 const Favorite = () => {
   const [fav, setFav] = useState([]);
 
@@ -12,7 +13,7 @@ const Favorite = () => {
       if (checkedItems.length > 0) {
         try {
           const promises = checkedItems.map((id) =>
-            axios.get(`http://localhost:4000/api/productid/${id}`)
+            axios.get(`${API_URL}/productid/${id}`)
           );
           const responses = await Promise.all(promises); // Wait for all API calls to complete
           const data = responses.map((response) => response.data); // Extract data from each response

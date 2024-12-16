@@ -47,7 +47,6 @@ const Navbar = () => {
   // Check if the array exists and get the length
   const arrayLength = storedArray ? storedArray.length : 0;
   
-  console.log(arrayLength);
   const linkStyle = 'ease duration-100 hover:text-blue-300 hover:border-b-2 hover:border-red-900';
 
   const renderAuthButtons = () => (

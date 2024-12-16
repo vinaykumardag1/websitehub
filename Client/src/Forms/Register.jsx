@@ -3,6 +3,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link,useNavigate} from 'react-router-dom'
+import { API_URL } from '../services/apis';
+
 const Register = () => {
   // Individual useState hooks for each input field
   const [name, setName] = useState("");
@@ -26,7 +28,7 @@ const Register = () => {
   
   
     try {
-      const response = await axios.post("http://localhost:4000/api/register", {
+      const response = await axios.post(`${API_URL}/register`, {
         name:name,
         email:email,
         password:password,

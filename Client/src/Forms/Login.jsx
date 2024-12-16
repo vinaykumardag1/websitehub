@@ -3,6 +3,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link,useNavigate } from 'react-router-dom';
+import { API_URL } from '../services/apis';
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +15,7 @@ const Login = () => {
     e.preventDefault();
   
     try {
-      const response = await axios.post("http://localhost:4000/api/login", {
+      const response = await axios.post(`${API_URL}/login`, {
         email: email,
         password: password,
       });
