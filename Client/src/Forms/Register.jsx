@@ -35,7 +35,7 @@ const Register = () => {
         password:password,
       });
       
-      console.log(response.data); // Check the response
+      // console.log(response.data); // Check the response
   
       if (response.data.message) {
         toast.success(response.data.message);
@@ -61,7 +61,7 @@ const Register = () => {
 
   return (
     <div className='flex justify-center items-center h-screen'>
-      <div className='shadow-2xl p-12 w-1/4'>
+      <div className='shadow-2xl p-12 w-full sm:w-[80%] md:w-[50%] lg:w-1/3'>
         <p className='mb-8 text-center text-3xl'>Register Form</p>
         <form onSubmit={formSubmit}>
           <label htmlFor="name" className={formStyles.label}>Name</label>
