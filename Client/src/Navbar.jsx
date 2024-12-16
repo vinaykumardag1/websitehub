@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, IconButton, Menu, MenuItem, ListItemIcon, Fade } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Logout from '@mui/icons-material/Logout';
 import logo_icon from './assets/images/logo.svg';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import {API_URL} from './services/apis'
-
+import { API_URL } from './services/apis';
 import Badge from '@mui/material/Badge';
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
   useEffect(() => {
@@ -26,6 +26,8 @@ const Navbar = () => {
         } catch (error) {
           console.error('Error fetching user:', error);
         }
+      } else {
+        setUser(null); // Reset user if no userId in localStorage
       }
     };
     fetchUser();
@@ -36,16 +38,13 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('userId');
-    setUser(null);
+    localStorage.removeItem('authToken');
+    setUser(null); // Update state immediately on logout
     handleMenuClose();
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("checkedItems")
     navigate("/login");
   };
-  const storedArray = JSON.parse(localStorage.getItem('checkedItems'));
 
-  // Check if the array exists and get the length
+  const storedArray = JSON.parse(localStorage.getItem('checkedItems'));
   const arrayLength = storedArray ? storedArray.length : 0;
   
   const linkStyle = 'ease duration-100 hover:text-blue-300 hover:border-b-2 hover:border-red-900';
@@ -68,7 +67,7 @@ const Navbar = () => {
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose} TransitionComponent={Fade}>
         <MenuItem disabled>
-          <p className="px-4 py-2 rounded-2xl bg-gray-200 text-black">Welcome, {user.name}!</p>
+          <p className="px-4 py-2 rounded-2xl bg-gray-200 text-black">Welcome, {user?.name}!</p>
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
@@ -77,12 +76,10 @@ const Navbar = () => {
           Logout
         </MenuItem>
         <MenuItem >
-       
-        <Badge color="secondary" badgeContent={arrayLength}>
-         <FavoriteBorder>
-         </FavoriteBorder>
-        </Badge>
-         <Link to='/favorite' className='ml-3'>Favorite</Link>
+          <Badge color="secondary" badgeContent={arrayLength}>
+            <FavoriteBorder />
+          </Badge>
+          <Link to='/favorite' className='ml-3'>Favorite</Link>
         </MenuItem>
       </Menu>
     </div>
@@ -93,7 +90,7 @@ const Navbar = () => {
       <li className={linkStyle}><Link to="/">Home</Link></li>
       <li className={linkStyle}><Link to="/product">Categories</Link></li>
       <li className={linkStyle}><Link to="/about">About</Link></li>
-      <li>{user && user ? renderUserMenu() : renderAuthButtons()}</li>
+      <li>{user ? renderUserMenu() : renderAuthButtons()}</li>
     </ul>
   );
 
