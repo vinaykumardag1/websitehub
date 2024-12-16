@@ -5,8 +5,7 @@ import Navbar from "../Navbar";
 import Footer from "./Footer";
 import Loading from "./Loading";
 import { Container } from "@mui/material";
-
-const API_URL = `https://websitehub-vki3.onrender.com/api`;
+import { API_URL } from '../services/apis';
 
 const CategorySelector = () => {
   const [category, setCategory] = useState(""); // Stores selected category
