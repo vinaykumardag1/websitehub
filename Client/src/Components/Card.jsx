@@ -18,11 +18,11 @@ const Card = ({ item, index }) => {
 
   // Handle checkbox change
   const handleCheckboxChange = () => {
-    let user=localStorage.getItem('userId')
-    if (user) {
-       isAuthenticated    
-    }else{
-      !isAuthenticated
+    const user = localStorage.getItem('userId');
+    
+    if (!isAuthenticated || !user) {
+      console.warn('User is not authenticated or logged in.');
+      return; // Prevent further action if the user is not authenticated
     }
 
     const storedState = JSON.parse(localStorage.getItem('checkedItems')) || [];
