@@ -93,7 +93,7 @@ const Navbar = () => {
       <li className={linkStyle}><Link to="/">Home</Link></li>
       <li className={linkStyle}><Link to="/product">Categories</Link></li>
       <li className={linkStyle}><Link to="/about">About</Link></li>
-      <li>{user ? renderUserMenu() : renderAuthButtons()}</li>
+      <li>{user && user ? renderUserMenu() : renderAuthButtons()}</li>
     </ul>
   );
 
