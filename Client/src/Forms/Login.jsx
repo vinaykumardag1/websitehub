@@ -36,6 +36,7 @@ const Login = () => {
         navigate("/");  // Redirect to home page or another route after login
       }
     } catch (err) {
+      console.error("error in login",err)
       if (err.response && err.response.data && err.response.data.message) {
         toast.warning(err.response.data.message);  // Show error message from server
       } else {
