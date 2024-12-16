@@ -68,7 +68,7 @@ const Navbar = () => {
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose} TransitionComponent={Fade}>
         <MenuItem disabled>
-          <p className="px-4 py-2 rounded-2xl bg-gray-200 text-gray-800">Welcome, {user.name}!</p>
+          <p className="px-4 py-2 rounded-2xl bg-gray-200 text-black">Welcome, {user.name}!</p>
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
