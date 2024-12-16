@@ -13,7 +13,7 @@ const Favorite = () => {
       if (checkedItems.length > 0) {
         try {
           const promises = checkedItems.map((id) =>
-            axios.get(`${LOCAL_API_URL}/productid/${id}`)
+            axios.get(`${API_URL}/productid/${id}`)
           );
           const responses = await Promise.all(promises); // Wait for all API calls to complete
           const data = responses.map((response) => response.data); // Extract data from each response
