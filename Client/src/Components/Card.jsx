@@ -18,9 +18,11 @@ const Card = ({ item, index }) => {
 
   // Handle checkbox change
   const handleCheckboxChange = () => {
-    if (!isAuthenticated) {
-      alert('Please log in to select your favorites.');
-      return;
+    let user=localStorage.getItem('userId')
+    if (user) {
+       isAuthenticated    
+    }else{
+      !isAuthenticated
     }
 
     const storedState = JSON.parse(localStorage.getItem('checkedItems')) || [];
