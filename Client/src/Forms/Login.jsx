@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link,useNavigate } from 'react-router-dom';
-import { API_URL } from '../services/apis';
+import { API_URL, LOCAL_API_URL } from '../services/apis';
 
 const Login = () => {
   const [email, setEmail] = useState("");
