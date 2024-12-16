@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link,useNavigate} from 'react-router-dom'
 import { API_URL } from '../services/apis';
+import pdf from '../assets/WebsiteHub_Terms_and_Conditions.pdf'
 
 const Register = () => {
   // Individual useState hooks for each input field
@@ -103,10 +104,10 @@ const Register = () => {
             onChange={(e)=>setCPassword(e.target.value)}
             required/>
             <input type="checkbox" id='checkbox' name='checkbox' className="m-2" required/>
-            <label htmlFor="checkbox">Terms and Conditions</label> <br />
+            <label htmlFor="checkbox"> <a href={pdf}className='text-blue-900'>Terms&Conditions</a></label> <br />
           <button
             type='submit'
-            className="rounded-md bg-indigo-600 px-3 py-2 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md my-2 bg-indigo-600 px-3 py-2 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Submit
           </button>
