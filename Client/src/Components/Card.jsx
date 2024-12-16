@@ -4,6 +4,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import { useAuth } from '../context/AuthContext'; // Import the AuthContext
 
+
 const Card = ({ item, index }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
   const { isAuthenticated } = useAuth(); // Get authentication status from context
@@ -35,7 +36,14 @@ const Card = ({ item, index }) => {
 
     // Update local storage
     localStorage.setItem('checkedItems', JSON.stringify(updatedState));
-    setIsChecked(!isChecked); // Toggle state
+    let user=localStorage.getItem('userId')
+    // setIsChecked(!isChecked); // Toggle state
+    if(user){
+      console.log(user)
+       setIsChecked(isChecked);
+    }else{
+       setIsChecked(!isChecked);
+    }
   };
 
   return (

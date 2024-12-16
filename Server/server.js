@@ -13,10 +13,13 @@ const bodyParser=require("body-parser")
 const CookieParser=require('cookie-parser')
 const PORT=process.env.PORT || 4000
 
+// app.use(cors({
+//     origin:'https://websitehub.vercel.app',
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true,
+// }))
 app.use(cors({
-    origin:'https://websitehub.vercel.app',
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
+    origin:'*'
 }))
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@atlascluster.8tdja.mongodb.net/webhub?retryWrites=true&w=majority`)
         .then(()=>console.log("mongodb connected"))
