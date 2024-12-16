@@ -36,14 +36,13 @@ const Card = ({ item, index }) => {
 
     // Update local storage
     localStorage.setItem('checkedItems', JSON.stringify(updatedState));
-    let user=localStorage.getItem('userId')
-    // setIsChecked(!isChecked); // Toggle state
-    if(user){
-      console.log(user)
-       setIsChecked(isChecked);
-    }else{
-       setIsChecked(!isChecked);
-    }
+    setIsChecked(!isChecked);
+    // let user=localStorage.getItem('userId')
+    // if(user){
+    //    setIsChecked(isChecked);
+    // }else{
+    //    setIsChecked(!isChecked);
+    // }
   };
 
   return (

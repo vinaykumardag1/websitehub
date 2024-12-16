@@ -38,6 +38,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('userId');
+    localStorage.removeItem('checkedItem')
     localStorage.removeItem('authToken');
     setUser(null); // Update state immediately on logout
     handleMenuClose();
