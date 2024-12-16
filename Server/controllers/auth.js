@@ -16,7 +16,7 @@ exports.login = (req, res) => {
             process.env.JWT_SECRET || "fallback_secret",
             { expiresIn: "1h" } // Token expires in 1 hour
         );
-        // Set the token as a cookie
+        // // Set the token as a cookie
         res.cookie("authToken", token, {
             httpOnly: true, // Secure against XSS attacks
             sameSite: "strict", // Prevent CSRF
@@ -25,13 +25,9 @@ exports.login = (req, res) => {
         });
 
         // Initialize session
-        req.session.user = { username }; // Store user info in the session
-      
-        
-        // Redirect to admin dashboard
+        // Store user info in the session
         res.redirect("/admin");
     } catch (error) {
-       
         res.status(500).send("An error occurred during login.");
     }
 };

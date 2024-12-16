@@ -54,22 +54,22 @@ const Loading = () => {
      <div className='flex flex-wrap justify-center items-center gap-5 w-full '>
        
     
-    {list.map((item)=>(
-    <Card variant="outlined" sx={{ width: 243, display: 'flex', gap: 2 }}>
+    {list.map((item,index)=>(
+    <Card variant="outlined" key={index} sx={{ width: 243, display: 'flex', gap: 2 }}>
       <Typography >
-      <Skeleton variant="overlay">
-       <h1 className="my-8">{item.website}</h1>
+      <Skeleton className="my-8" variant="overlay">
+     {item.name}
       </Skeleton>
       </Typography>
-      <Typography className="my-8">
-      <Skeleton variant="overlay">
-       <a className="my-8">{item.link}</a>
+      <Typography >
+      <Skeleton className="my-8" variant="overlay">
+      {item.link}
       </Skeleton>
       </Typography>
     <Typography className="my-8">
   
-      <Skeleton>
-        <p className="my-8">{item.desc}</p>
+      <Skeleton className="my-8">
+       {item.desc}
       </Skeleton>
     </Typography>
   </Card>

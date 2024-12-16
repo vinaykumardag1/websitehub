@@ -1,7 +1,4 @@
-
-
-const API_URL = `https://websitehub-vki3.onrender.com/api`;
-
+export const API_URL = `https://websitehub-vki3.onrender.com/api`;
 
 export const webhubapi = async () => {
   
@@ -18,4 +15,3 @@ export const webhubapi = async () => {
     }
   };
 
- 

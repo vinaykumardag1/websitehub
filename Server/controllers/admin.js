@@ -1,6 +1,6 @@
-const User=require("../models/User")
+const Data=require("../models/Data")
 module.exports.admin=async(req,res)=>{
-    const existingUser = await User.findOne(
+    const existingUser = await Data.findOne(
         {
              name: req.body.name,
              url:req.body.url,
@@ -12,7 +12,7 @@ module.exports.admin=async(req,res)=>{
       res.send("website is already existed");
       res.redirect("/")
     }
-    const userData = new User(req.body);
+    const userData = new Data(req.body);
     userData.save()
         .then(() => res.redirect("/admin"))
         .catch(err => res.status(400).send('Error saving data: ' + err));
