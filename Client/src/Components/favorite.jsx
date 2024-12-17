@@ -18,7 +18,7 @@ const Favorite = () => {
           const responses = await Promise.all(promises); // Wait for all API calls to complete
           const data = responses.map((response) => response.data); // Extract data from each response
           setFav(data); // Set the combined data in the state
-          console.log(data);
+          // console.log(data);
         } catch (error) {
           console.error('Error fetching favorite items:', error);
         }

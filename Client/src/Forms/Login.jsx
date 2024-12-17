@@ -20,7 +20,7 @@ const Login = () => {
         password: password,
       });
   
-      console.log(response.data); // Log the response data to check if token is included
+      // console.log(response.data); // Log the response data to check if token is included
   
       if (response.data.message) {
         toast.success(response.data.message);  // Display success message
