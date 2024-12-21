@@ -23,31 +23,27 @@ const Login = () => {
       // console.log(response.data); // Log the response data to check if token is included
   
       if (response.data.message) {
-        toast.success(response.data.message);  // Display success message
+        toast.success(response.data.message);  
   
-        if (response.data.token) {  // Ensure 'token' is in the response
-          localStorage.setItem("authToken", response.data.token);  // Store the token in localStorage
+        if (response.data.token) {  
+          localStorage.setItem("authToken", response.data.token); 
         }
   
         if (response.data.id) {
-          localStorage.setItem("userId", response.data.id);  // Optionally store the user ID in localStorage
+          localStorage.setItem("userId", response.data.id);  
         }
   
-        navigate("/");  // Redirect to home page or another route after login
+        navigate("/");  
       }
     } catch (err) {
       console.error("error in login",err)
       if (err.response && err.response.data && err.response.data.message) {
-        toast.warning(err.response.data.message);  // Show error message from server
-      } else {
+        toast.warning(err.response.data.message); 
         toast.error("An unexpected error occurred");
       }
     }
   };
   
-  
-
-  // Styles for the form elements
   const formStyles = {
     label: "block text-sm font-medium text-gray-900",
     input: "block w-full rounded-md bg-white my-2 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm",

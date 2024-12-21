@@ -68,7 +68,7 @@ const Card = ({ item, index }) => {
           />
         </li>
         <a href={`${item.url}`} target="_blank" rel="noopener noreferrer">
-          <li className="py-3 text-blue-400">{item.name}</li>
+          <li className="py-3 text-blue-900 text-2xl">{item.name}</li>
         </a>
         <li className="py-3">{item.desc}</li>
       

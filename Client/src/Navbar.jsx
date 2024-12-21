@@ -27,7 +27,7 @@ const Navbar = () => {
           console.error('Error fetching user:', error);
         }
       } else {
-        setUser(null); // Reset user if no userId in localStorage
+        setUser(null); 
       }
     };
     fetchUser();
@@ -53,7 +53,7 @@ const Navbar = () => {
   const renderAuthButtons = () => (
     <> 
     <div className="flex gap-3 items-center">
-      <IconButton onClick={handleMenuClick}>
+      <IconButton title='Menu' onClick={handleMenuClick}>
         <MoreVertIcon />
       </IconButton>
       <Menu  anchorEl={anchorEl} open={open} onClose={handleMenuClose} TransitionComponent={Fade}>
@@ -70,7 +70,7 @@ const Navbar = () => {
 
   const renderUserMenu = () => (
     <div className="flex gap-3 items-center">
-      <IconButton onClick={handleMenuClick}>
+      <IconButton title='Menu' onClick={handleMenuClick}>
         <MoreVertIcon />
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose} TransitionComponent={Fade}>

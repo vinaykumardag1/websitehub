@@ -15,8 +15,6 @@ createRoot(document.getElementById('root')).render(
       <App/>
       </CheckedItemsProvider>
       </AuthProvider>
-      
-      
     </BrowserRouter>
   </StrictMode>
 )
