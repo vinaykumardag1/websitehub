@@ -53,7 +53,7 @@ const Home_data = () => {
         </div>
         <div className="w-full grid gap-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1">
           {filteredData.length > 0 ? (
-            filteredData.map((item, index) => <Card key={index} item={item} />)
+            filteredData.sort().map((item, index) => <Card key={index} item={item} />)
           ) : (
            <img src={noresults} alt='no results available' />
           )}

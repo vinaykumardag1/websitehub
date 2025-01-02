@@ -14,7 +14,7 @@ const CookieParser=require('cookie-parser')
 const PORT=process.env.PORT || 4000
 
 app.use(cors({
-    origin:'https://websitehub.vercel.app',
+    origin:'*',
     methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }))
