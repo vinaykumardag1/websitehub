@@ -39,7 +39,8 @@ const Login = () => {
       console.error("error in login",err)
       if (err.response && err.response.data && err.response.data.message) {
         toast.warning(err.response.data.message); 
-        toast.error("An unexpected error occurred");
+      }else{
+         toast.error("An unexpected error occurred");
       }
     }
   };
