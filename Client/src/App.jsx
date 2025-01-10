@@ -6,6 +6,8 @@ import Register from './Forms/Register'
 import Login from './Forms/Login'
 import Favorite from './Components/favorite'
 import { Routes,Route } from 'react-router-dom'
+import Forgot from './Forms/Forgot'
+import OTP from './Forms/OTP'
 
 
 
@@ -20,7 +22,8 @@ const App = () => {
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/favorite' element={<Favorite/>}/>
-       
+        <Route path='/reset-password' element={<Forgot/>}/>
+       <Route path='/otp' element={<OTP/>}/>
       </Routes>
       
     

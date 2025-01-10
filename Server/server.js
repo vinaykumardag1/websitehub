@@ -7,6 +7,7 @@ const admin=require("./controllers/admin")
 const apis=require("./controllers/api")
 const {authenticate}=require("./middleware/auth")
 const authClient=require("./controllers/authClient")
+
 const app=express()
 const session=require("express-session")
 const bodyParser=require("body-parser")
@@ -47,7 +48,9 @@ app.post("/api/register",authClient.register)
 app.post("/api/login",authClient.login)
 app.get("/api/userdetails/:id", authClient.getUser);
 app.get("/api/productid/:id",authClient.getId)
-
+app.post("/api/send-otp",authClient.sendOtp)
+app.post("/api/verify-otp",authClient.verifyOtpAndResetPassword)
+// app.post("/api")
 // apis datarouetsre
 app.get("/api",apis.api)
 app.get("/api/:category",apis.api_category);
