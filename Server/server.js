@@ -19,6 +19,8 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }))
+// app.use(express.static("img"));
+// app.use(express.static(__dirname + './views/img'));
 // app.use(cors({
 //     origin:'*'
 // }))
@@ -33,7 +35,7 @@ app.use(session({secret: process.env.SESSIONS_KEY,cookie:{maxAge:3000}, resave: 
 app.use(CookieParser());
 // 
 app.set("view engine","ejs")
-app.set("views","views")
+app.set("views","./views")
 app.get("/",(req,res)=>{
     res.render("dashboard")
 })
@@ -42,6 +44,9 @@ app.get("/login",(req,res)=>{
 })
 app.get("/admin",authenticate ,(req,res)=>{
     res.render('admin')
+})
+app.get("/data",(req,res)=>{
+    res.render("data")
 })
 //client and userroutes
 app.post("/api/register",authClient.register)
