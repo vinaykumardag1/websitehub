@@ -46,10 +46,7 @@ module.exports.datadelete = async (req, res) => {
     if (!deletedData) {
       return res.status(404).json({ message: "Data not found!" });
     }
-    res.status(200).json({
-      message: "Data deleted successfully!",
-      data: deletedData,
-    });
+    res.status(200).json({message: "Data deleted successfully!",data: deletedData,});
   } catch (error) {
     console.error("Error deleting data:", error);
     res.status(500).json({
