@@ -9,7 +9,6 @@ export const CheckedItemsProvider = ({ children }) => {
   const [checkedItems, setCheckedItems] = useState([]);
 
   useEffect(() => {
-    // Load initial state from localStorage
     const storedState = JSON.parse(localStorage.getItem('checkedItems')) || [];
     setCheckedItems(storedState);
   }, []);

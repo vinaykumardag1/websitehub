@@ -8,6 +8,55 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 </head>
 <body>
+    <!--  -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="admin-form" method="POST" class="form-inline py-3">
+                    <label for="name">Website Name</label>
+                    <input type="text" class="form-control" id="name" name="name">
+
+                    <label for="url">URL</label>
+                    <input type="url" class="form-control py-2" name="url" id="url" required>
+
+                    <label for="desc">Description</label>
+                    <textarea name="desc" id="desc" class="form-control py-2" required></textarea>
+
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="form-control">
+                        <option value="">Select</option>
+                        <option value="education">Education</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="technology">Technology</option>
+                        <option value="health">Health</option>
+                        <option value="ai">Artificial Intelligence</option>
+                        <option value="coding">Coding</option>
+                        <option value="editing">Editing</option>
+                        <option value="socialmedia">Social Media</option>
+                        <option value="news">News</option>
+                        <option value="travel">Travel</option>
+                        <option value="government">Government</option>
+                        <option value="course">Course</option>
+                        <option value="e_commerce">Ecommerce</option>
+                        <option value="others">Other</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary w-100 my-2">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--  -->
 <div class="container-fluid">
     <div class="d-flex align-items-center py-3">
         <img src="https://websitehub.vercel.app/assets/logo-DvbLm3b3.svg" alt="website logo" style="width: 100px;" />
@@ -77,6 +126,7 @@
                             <th>Website Name</th>
                             <th>Website URL</th>
                             <th>Description</th>
+                            <th>Category</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -92,8 +142,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <script>
-    $(document).ready(function () {
-        const apiUrl = "https://websitehub-vki3.onrender.com/api/";
+     $(document).ready(function () {
+        const apiUrl = "https://websitehub-vki3.onrender.com/api";
         const table = $("#myTable").DataTable();
 
         // Fetch data from the API and populate the table
@@ -109,8 +159,18 @@
                         item.name,
                         item.url,
                         item.desc,
+                        item.category,
                         `
-                        <button class="btn btn-warning edit-btn" data-id="${item._id}" data-name="${item.name}" data-desc="${item.desc}">Edit</button>
+                        <button class="btn btn-warning edit-btn" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#exampleModal" 
+                                data-id="${item._id}" 
+                                data-name="${item.name}" 
+                                data-url="${item.url}" 
+                                data-desc="${item.desc}" 
+                                data-category="${item.category}">
+                            Edit
+                        </button>
                         <button class="btn btn-danger delete-btn" data-id="${item._id}">Delete</button>
                         `
                     ]).draw();
@@ -120,67 +180,64 @@
             }
         }
 
-        // // Update row
-        // async function updateRow(id, name, desc) {
-        //     try {
-        //         const response = await fetch(`${apiUrl}${id}`, {
-        //             method: "PUT",
-        //             headers: { "Content-Type": "application/json" },
-        //             body: JSON.stringify({ name, desc })
-        //         });
-        //         if (response.ok) {
-        //             fetchData();
-        //             alert("Row updated successfully!");
-        //         } else {
-        //             alert("Failed to update row.");
-        //         }
-        //     } catch (error) {
-        //         console.error("Error updating row:", error);
-        //     }
-        // }
+        // Delete item
+        $(document).on("click", ".delete-btn", async function () {
+            const id = $(this).data("id");
+            if (confirm("Are you sure you want to delete this item?")) {
+                try {
+                    await fetch(`${apiUrl}/delete/${id}`, { method: "DELETE" });
+                    alert("Item deleted successfully!");
+                    fetchData();
+                } catch (error) {
+                    console.error("Error deleting item:", error);
+                }
+            }
+        });
 
-        // // Delete row
-        // async function deleteRow(id) {
-        //     try {
-        //         const response = await fetch(`${apiUrl}${id}`, {
-        //             method: "DELETE"
-        //         });
-        //         if (response.ok) {
-        //             fetchData();
-        //             alert("Row deleted successfully!");
-        //         } else {
-        //             alert("Failed to delete row.");
-        //         }
-        //     } catch (error) {
-        //         console.error("Error deleting row:", error);
-        //     }
-        // }
+        // Edit item
+        $(document).on("click", ".edit-btn", function () {
+            const id = $(this).data("id");
+            const name = $(this).data("name");
+            const url = $(this).data("url");
+            const desc = $(this).data("desc");
+            const category = $(this).data("category");
 
-        // // Handle edit button click
-        // $("#myTable").on("click", ".edit-btn", function () {
-        //     const id = $(this).data("id");
-        //     const currentName = $(this).data("name");
-        //     const currentDesc = $(this).data("desc");
+            // Prefill modal form fields
+            $("#exampleModal #name").val(name);
+            $("#exampleModal #url").val(url);
+            $("#exampleModal #desc").val(desc);
+            $("#exampleModal #category").val(category);
 
-        //     const newName = prompt("Edit Name:", currentName);
-        //     const newDesc = prompt("Edit Description:", currentDesc);
+            // Handle form submission
+            $("#exampleModal .btn-primary").off("click").on("click", async function () {
+                const updatedData = {
+                    name: $("#exampleModal #name").val(),
+                    url: $("#exampleModal #url").val(),
+                    desc: $("#exampleModal #desc").val(),
+                    category: $("#exampleModal #category").val(),
+                };
 
-        //     if (newName !== null && newDesc !== null) {
-        //         updateRow(id, newName, newDesc);
-        //     }
-        // });
-
-        // // Handle delete button click
-        // $("#myTable").on("click", ".delete-btn", function () {
-        //     const id = $(this).data("id");
-        //     if (confirm("Are you sure you want to delete this row?")) {
-        //         deleteRow(id);
-        //     }
-        // });
+                try {
+                    await fetch(`${apiUrl}/update/${id}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(updatedData),
+                    });
+                    alert("Item updated successfully!");
+                    $("#exampleModal").modal("hide");
+                    fetchData();
+                } catch (error) {
+                    console.error("Error updating item:", error);
+                }
+            });
+        });
 
         // Fetch data on page load
         fetchData();
     });
+
+       
+    
 </script>
 
 </body>

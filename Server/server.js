@@ -62,9 +62,10 @@ app.get("/api/:category",apis.api_category);
 // admin routes
 app.post('/admin',admin.admin);
 app.post("/login",auth.login)
-app.post("/logout",auth.logout)
-
-
+app.post("/logout",auth.logout);
+app.post("/api/update/:id",admin.dataupdate)
+app.delete('api/delete/:id', admin.datadelete);
+// app.post("/delete",admin.)
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`)
 })
