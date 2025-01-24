@@ -46,11 +46,7 @@ const Card = ({ item, index }) => {
     // Update local storage
     localStorage.setItem('checkedItems', JSON.stringify(updatedState));
     setIsChecked(!isChecked);
-    if(!user){
-      setIsChecked(!isChecked)
-    }else{
-      setIsChecked(isChecked)
-    }
+  s
  
   };
 
