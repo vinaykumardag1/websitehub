@@ -14,7 +14,7 @@ const Card = ({ item, index }) => {
   // Check if userId exists in local storage
   useEffect(() => {
     const user = localStorage.getItem('userId');
-    setIsUserExists(!!user); // Set to true if user exists, false otherwise
+    setIsUserExists(user); // Set to true if user exists, false otherwise
   }, []);
 
   // Load initial state from local storage
@@ -45,7 +45,12 @@ const Card = ({ item, index }) => {
 
     // Update local storage
     localStorage.setItem('checkedItems', JSON.stringify(updatedState));
-    setIsChecked(!isChecked);
+    // setIsChecked(!isChecked);
+    if(!user){
+      setIsChecked(!isChecked)
+    }else{
+      setIsChecked(isChecked)
+    }
  
   };
 
