@@ -55,7 +55,7 @@ const Card = ({ item, index }) => {
         className="border-4 ease-linear duration-200 hover:scale-[110%] p-5 border-sky-100 rounded-2xl"
         key={index}
       >
-        <li className="text-3xl py-3 flex justify-between">
+        <li className="text-3xl text-[#fc7f3f] py-3 flex justify-between">
           {item.name}
           <Checkbox
             {...label}
@@ -68,9 +68,9 @@ const Card = ({ item, index }) => {
           />
         </li>
         <a href={`${item.url}`} target="_blank" title='website links' rel="noopener noreferrer">
-          <li className="py-3 text-blue-900 text-2xl">{item.name}</li>
+          <li className="py-3 text-[#91254a] text-2xl">{item.name}</li>
         </a>
-        <li className="py-3">{item.desc}</li>
+        <li className="py-3 text-[#db8f8f]">{item.desc}</li>
       
       </ul>
     </div>
