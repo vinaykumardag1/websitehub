@@ -46,7 +46,7 @@ const Home_data = () => {
   return (
     <>
       <Container className="py-10">
-        <div className="flex justify-center gap-1 my-11">
+        <div className="flex justify-center gap-1 my-11 ">
           <input
             type="search"
             placeholder="Search"

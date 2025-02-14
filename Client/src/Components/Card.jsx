@@ -70,7 +70,7 @@ const Card = ({ item, index }) => {
         <a href={`${item.url}`} target="_blank" title='website links' rel="noopener noreferrer">
           <li className="py-3 text-[#91254a] text-2xl">{item.name}</li>
         </a>
-        <li className="py-3">{item.desc}</li>
+        <li className="py-3 text-[#ffffff]">{item.desc}</li>
       
       </ul>
     </div>
