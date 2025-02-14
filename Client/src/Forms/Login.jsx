@@ -48,13 +48,13 @@ const Login = () => {
   };
   
   const formStyles = {
-    label: "block text-sm font-medium text-gray-900",
+    label: "block text-sm font-medium text-white",
     input: "block w-full rounded-md bg-white my-2 px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm",
   };
 
   return (
-    <div className='flex justify-center items-center h-screen'>
-      <div className='shadow-2xl p-12'>
+    <div className='flex justify-center text-white items-center h-screen'>
+      <div className='bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg p-12'>
         <p className='mb-8 text-center text-3xl'>Login Form</p>
         <form onSubmit={formSubmit}>
           <label htmlFor="email" className={formStyles.label}>Email</label>

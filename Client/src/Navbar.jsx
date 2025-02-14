@@ -71,7 +71,7 @@ const Navbar = () => {
   const renderUserMenu = () => (
     <div className="flex gap-3 items-center">
       <IconButton title='Menu' onClick={handleMenuClick}>
-        <MoreVertIcon />
+        <MoreVertIcon className='text-white'/>
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose} TransitionComponent={Fade}>
         <MenuItem disabled>
@@ -94,7 +94,7 @@ const Navbar = () => {
   );
 
   const renderLinks = () => (
-    <ul className="flex items-center gap-5">
+    <ul className="flex text-white items-center gap-5">
       <li className={linkStyle}><Link to="/">Home</Link></li>
       <li className={linkStyle}><Link to="/product">Categories</Link></li>
       <li className={linkStyle}><Link to="/about">About</Link></li>
