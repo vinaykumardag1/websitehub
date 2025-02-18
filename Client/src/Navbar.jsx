@@ -54,7 +54,7 @@ const Navbar = () => {
     <> 
     <div className="flex gap-3 items-center">
       <IconButton title='Menu' onClick={handleMenuClick}>
-        <MoreVertIcon />
+        <MoreVertIcon className="text-white" />
       </IconButton>
       <Menu  anchorEl={anchorEl} open={open} onClose={handleMenuClose} TransitionComponent={Fade}>
     <MenuItem>
@@ -105,10 +105,10 @@ const Navbar = () => {
   return (
     <Container>
       <div className="top-0 py-5 flex items-center justify-between w-full">
-        <h1 className="flex items-center text-3xl font-bold">
-          <a href="#">
+        <h1 className="flex text-white font-mono items-center text-3xl font-bold">
+         
             <img src={logo_icon} alt="logo icon" className="w-16 h-16 rounded-full mr-3" />
-          </a>
+         
           WebSiteHub
         </h1>
 
