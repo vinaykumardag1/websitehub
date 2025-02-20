@@ -42,7 +42,7 @@ app.get("/",(req,res)=>{
 app.get("/login",(req,res)=>{
     res.render("login")
 })
-app.get("/admin",authenticate ,(req,res)=>{
+app.get("/admin",authenticate,(req,res)=>{
     res.render('admin')
 })
 app.get("/data",(req,res)=>{
