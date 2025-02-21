@@ -10,7 +10,7 @@ const Footer = () => {
     <Container>
     <div className=' py-10'>
       <ul className='flex w-full justify-center text-3xl items-center gap-9' type='none'>
-        <li><a href="mailto:vinaykumardag1@gmail.com" title="mail "><CiMail alt="mail icon" /></a></li>
+        <li><a href="mailto:vinaykumardag1@gmail.com" title="mail "><CiMail  alt="mail icon" /></a></li>
         <li><a href="https://www.instagram.com/daggupati_vinay/" title="Instagram " target='_blank'><FaInstagram alt="mail icon"/></a></li>
         <li><a href="https://x.com/vinay_daggupati" title="Twitter"><FaXTwitter/></a></li>
         <li><a href="https://www.linkedin.com/in/vinay-kumar-daggupati-b3141224b/" title="Linked In"><CiLinkedin/></a></li>
