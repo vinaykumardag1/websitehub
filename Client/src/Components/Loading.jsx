@@ -56,7 +56,7 @@ const Loading = () => {
     
     {list.map((item,index)=>(
     <Card variant="outlined" key={index} sx={{ width: 243, display: 'flex', gap: 2 }}>
-      <Typography >
+      <Typography className="">
       <Skeleton className="my-8" variant="overlay">
      {item.name}
       </Skeleton>
