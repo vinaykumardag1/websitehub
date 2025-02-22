@@ -31,7 +31,7 @@ const ScrollToTop = () => {
         <div className="text-center text-[50px] drop-shadow-xl rounded-xl w-9 fixed right-4 sm:right-8 bottom-2 md:right-10 z-10">
             {isVisible && (
                 <button onClick={scrollToTop}>
-                   <IoIosArrowDropup/>
+                   <IoIosArrowDropup className='text-white'/>
                 </button>
             )}
         </div>
