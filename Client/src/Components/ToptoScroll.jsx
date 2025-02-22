@@ -3,7 +3,6 @@ import { IoIosArrowDropup } from "react-icons/io";
 const ScrollToTop = () => {
     const [isVisible, setIsVisible] = useState(false);
 
-   
     const toggleVisibility = () => {
         if (window.pageYOffset > 300) {
             setIsVisible(true);
@@ -12,7 +11,6 @@ const ScrollToTop = () => {
         }
     };
 
-  
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
