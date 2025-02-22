@@ -13,7 +13,7 @@ import OTP from './Forms/OTP'
 
 const App = () => {
   return (
-    <div className='bg-[url(./assets/images/3d-image.jpg)] '>
+    <div>
   
       <Routes>
         <Route path='/' element={<Home/>} />
