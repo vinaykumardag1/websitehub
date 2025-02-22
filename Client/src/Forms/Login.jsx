@@ -8,11 +8,13 @@ import { API_URL, LOCAL_API_URL } from '../services/apis';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // Form submit handler
   const formSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
   
     try {
       const response = await axios.post(`${API_URL}/login`, {
@@ -35,6 +37,7 @@ const Login = () => {
           localStorage.setItem("userId", response.data.id);  
         }
   
+        setLoading(false);
         navigate("/");  
       }
     } catch (err) {
@@ -44,6 +47,7 @@ const Login = () => {
       }else{
          toast.error("An unexpected error occurred");
       }
+      setLoading(false);
     }
   };
   
@@ -80,8 +84,9 @@ const Login = () => {
           <button
             type='submit'
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            disabled={loading}
           >
-            Submit
+            {loading ? 'Loading...' : 'Submit'}
           </button>
           <p className='my-2'>if your not <Link to='/register' className="text-blue-600">Registered?</Link></p>
           <p>Forgot Password <Link to="/otp" className='text-blue-600'>reset Password?</Link></p>

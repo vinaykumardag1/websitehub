@@ -12,22 +12,21 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate=useNavigate()
-
-
 
   // Form submit handler
   const formSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
   
     // Check for password mismatch
     if (password !== cPassword) {
       toast.warning("Password and confirm password do not match");
+      setLoading(false);
       return;
     }
  
-  
-  
     try {
       const response = await axios.post(`${API_URL}/register`, {
         name:name,
@@ -39,7 +38,8 @@ const Register = () => {
   
       if (response.data.message) {
         toast.success(response.data.message);
-          navigate("/login")        
+        setLoading(false);
+        navigate("/login")        
       }
     } catch (err) {
       console.error("Error submitting data:", err);
@@ -50,6 +50,7 @@ const Register = () => {
       } else {
         toast.error("An unexpected error occurred");
       }
+      setLoading(false);
     }
   };
 
@@ -108,8 +109,9 @@ const Register = () => {
           <button
             type='submit'
             className="rounded-md my-2 bg-indigo-600 px-3 py-2 text-xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            disabled={loading}
           >
-            Submit
+            {loading ? 'Loading...' : 'Submit'}
           </button>
           <p>Already Registerd please <Link to='/login' className='text-blue-500'>Login</Link>?</p>
         </form>

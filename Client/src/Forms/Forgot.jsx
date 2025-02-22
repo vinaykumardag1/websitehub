@@ -10,15 +10,19 @@ const Forgot = () => {
   const [con_pass,setCon_pass]=useState("");
   const [new_pass,setNew_pass]=useState("");
   const [otp,setOtp]=useState("")
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // Form submit handler
   const formSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
   
     try {
         if(con_pass!==new_pass){
             toast.warning("passwords are not matched")
+            setLoading(false);
+            return;
         }
       const response = await axios.post(`${API_URL}/verify-otp`, {
         email: email,
@@ -31,6 +35,7 @@ const Forgot = () => {
       if (response.data.message) {
         toast.success(response.data.message);  
   
+        setLoading(false);
         navigate("/login");  
       }
     } catch (err) {
@@ -41,6 +46,7 @@ const Forgot = () => {
          toast.error("An unexpected error occurred");
          console.log(err)
       }
+      setLoading(false);
     }
   };
   
@@ -93,8 +99,9 @@ const Forgot = () => {
           <button
             type='submit'
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            disabled={loading}
           >
-            Submit
+            {loading ? 'Loading...' : 'Submit'}
           </button>
         </form>
       </div>

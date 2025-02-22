@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const OTP = () => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,6 +16,7 @@ const OTP = () => {
 
   const formSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(`${API_URL}/send-otp`, {
         email,
@@ -22,6 +24,7 @@ const OTP = () => {
 
       if (response.data.message) {
         toast.success(response.data.message);
+        setLoading(false);
         navigate('/reset-password');
       }
     } catch (err) {
@@ -31,6 +34,7 @@ const OTP = () => {
       } else {
         toast.error("An unexpected error occurred");
       }
+      setLoading(false);
     }
   };
 
@@ -60,8 +64,9 @@ const OTP = () => {
             <button
               type="submit"
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              disabled={loading}
             >
-              Submit
+              {loading ? 'Loading...' : 'Submit'}
             </button>
           </form>
         </div>
