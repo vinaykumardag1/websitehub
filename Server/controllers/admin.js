@@ -10,7 +10,7 @@ module.exports.admin=async(req,res)=>{
     );
     if (existingUser) {
       res.send("website is already existed");
-      res.redirect("/")
+      res.redirect("/admin")
     }
     const userData = new Data(req.body);
     userData.save()
