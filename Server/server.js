@@ -45,9 +45,9 @@ app.get("/login",(req,res)=>{
 app.get("/admin",authenticate,(req,res)=>{
     res.render('admin')
 })
-app.get("/data",(req,res)=>{
-    res.render("data")
-})
+// app.get("/data",(req,res)=>{
+//     res.render("data")
+// })
 //client and userroutes
 app.post("/api/register",authClient.register)
 app.post("/api/login",authClient.login)
