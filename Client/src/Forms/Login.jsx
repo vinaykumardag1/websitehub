@@ -39,6 +39,7 @@ const Login = () => {
   
         setLoading(false);
         navigate("/");  
+        window.location.reload()
       }
     } catch (err) {
       console.error("error in forgot password",err)
