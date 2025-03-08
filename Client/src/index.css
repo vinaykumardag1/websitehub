@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body{
+
+body {
     background-image: url("./assets/images/3d-image.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover; /* Optional: Ensures the image covers the entire background */
 }
