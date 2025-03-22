@@ -35,7 +35,7 @@ const Favorite = () => {
       {fav.length > 0 ? (
         fav.map((item, index) => <Card item={item} key={index} />)
       ) : (
-        <p>No favorite items selected.</p>
+        <p className='text-white'>No favorite items selected.</p>
       )}
     </div>
     </Container>

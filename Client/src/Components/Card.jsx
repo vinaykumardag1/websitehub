@@ -67,10 +67,11 @@ const Card = ({ item, index }) => {
             title='Add to favourite'
           />
         </li>
-        <a href={`${item.url}`} target="_blank" title='website links' rel="noopener noreferrer">
-          <li className="py-3 text-[#91254a] text-2xl">{item.name}</li>
-        </a>
+        <li className='text-[#ffff83]'>{item.category}</li>
         <li className="py-3 text-[#ffffff]">{item.desc}</li>
+        <a href={`${item.url}`} target="_blank" title='website links' rel="noopener noreferrer">
+          <li className="py-3 text-[#78fdff] text-2xl">Visit webiste</li>
+        </a>
       
       </ul>
     </div>
