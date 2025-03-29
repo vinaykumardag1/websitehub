@@ -14,7 +14,9 @@ const userSchema=new mongoose.Schema({
     password:{
         type:String,
         required:true,
-    }  
+    },
+    // favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'website' }]
+
 });
 const userData=mongoose.model('userdatas',userSchema)
 module.exports=userData;
