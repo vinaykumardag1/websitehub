@@ -52,7 +52,7 @@ const Card = ({ item, index }) => {
   return (
     <div>
       <ul
-        className="bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg border-4 ease-linear duration-200 hover:scale-[110%] p-5 border-sky-100 rounded-2xl"
+        className="bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg border-4  p-5 border-sky-100 rounded-2xl"
         key={index}
       >
         <li className="text-3xl text-[#fc7f3f] py-3 flex justify-between">
