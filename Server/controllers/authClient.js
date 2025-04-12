@@ -264,31 +264,45 @@ exports.verifyOtpAndResetPassword = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-// exports.add_fav_items=async (req, res) => {
-//   const { userId, itemId } = req.body;
+exports.add_fav_items=async (req, res) => {
+  const { userId, itemId } = req.body;
+
+  try {
+      const user = await userData.findById(userId);
+      if (!user.favorites.includes(itemId)) {
+          user.favorites.push(itemId);
+          await user.save();
+      }
+      res.status(200).json({ message: 'Item added to favorites', favorites: user.favorites });
+  } catch (error) {
+      res.status(500).json({ error: 'Failed to add item to favorites' });
+  }
+};
+
+// Remove an item from favorites
+exports.remove_fav_items= async (req, res) => {
+  const { userId, itemId } = req.body;
+
+  try {
+      const user = await userData.findById(userId);
+      user.favorites = user.favorites.filter(id => id.toString() !== itemId);
+      await user.save();
+      res.status(200).json({ message: 'Item removed from favorites', favorites: user.favorites });
+  } catch (error) {
+      res.status(500).json({ error: 'Failed to remove item from favorites' });
+  }
+}
+// exports.getFavorites = async (req, res) => {
+//   const userId = req.params.id;
 
 //   try {
-//       const user = await User.findById(userId);
-//       if (!user.favorites.includes(itemId)) {
-//           user.favorites.push(itemId);
-//           await user.save();
-//       }
-//       res.status(200).json({ message: 'Item added to favorites', favorites: user.favorites });
+//     const user = await userData.findById(userId).populate("favorites");
+//     if (!user) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
+//     res.json(user.favorites);
 //   } catch (error) {
-//       res.status(500).json({ error: 'Failed to add item to favorites' });
+//     console.error("Error fetching favorites:", error);
+//     res.status(500).json({ error: "Server error" });
 //   }
-// });
-
-// // Remove an item from favorites
-// exports.remove_fav_items= async (req, res) => {
-//   const { userId, itemId } = req.body;
-
-//   try {
-//       const user = await User.findById(userId);
-//       user.favorites = user.favorites.filter(id => id.toString() !== itemId);
-//       await user.save();
-//       res.status(200).json({ message: 'Item removed from favorites', favorites: user.favorites });
-//   } catch (error) {
-//       res.status(500).json({ error: 'Failed to remove item from favorites' });
-//   }
-// });
+// }

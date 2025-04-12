@@ -5,7 +5,7 @@ import Loading from './Loading';
 import { Container } from '@mui/material';
 import ScrollToTop from './ToptoScroll';
 import noresults from '../assets/images/idonthaveit.gif';
-
+import {ToastContainer} from 'react-toastify';
 const Home_data = () => {
   const [webhub, setWebhub] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -64,6 +64,7 @@ const Home_data = () => {
         </div>
       </Container>
       <ScrollToTop />
+      <ToastContainer />
     </>
   );
 };

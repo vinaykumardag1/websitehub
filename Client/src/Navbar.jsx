@@ -33,6 +33,7 @@ const Navbar = () => {
     fetchUser();
   }, []);
 
+
   const handleMenuClick = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
 
@@ -45,8 +46,7 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const storedArray = JSON.parse(localStorage.getItem('checkedItems'));
-  const arrayLength = storedArray ? storedArray.length : 0;
+  const arrayLength = user?.favorites?.length || 0;
   
   const linkStyle = 'ease duration-100 hover:text-blue-300 hover:border-b-2 hover:border-red-900';
 
@@ -77,6 +77,7 @@ const Navbar = () => {
         <MenuItem disabled>
           <p className="px-4 py-2 rounded-2xl bg-gray-200 text-black">Welcome, {user?.name}!</p>
         </MenuItem>
+      
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
@@ -84,7 +85,7 @@ const Navbar = () => {
           Logout
         </MenuItem>
         <MenuItem >
-          <Badge color="secondary" badgeContent={arrayLength}>
+          <Badge color="secondary" badgeContent={arrayLength} >
             <FavoriteBorder />
           </Badge>
           <Link to='/favorite' className='ml-3'>Favorite</Link>

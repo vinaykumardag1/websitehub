@@ -15,7 +15,14 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    // favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'website' }]
+    favorites: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'fav_items'
+      }],
+    createdAt:{
+        type:Date,
+        default:Date.now,
+    },
 
 });
 const userData=mongoose.model('userdatas',userSchema)

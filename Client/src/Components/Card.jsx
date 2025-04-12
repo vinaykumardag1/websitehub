@@ -2,57 +2,83 @@ import React, { useState, useEffect } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import { useAuth } from '../context/AuthContext'; // Import the AuthContext
-
+import axios from 'axios';
+import { toast } from 'react-toastify'; // No ToastContainer here
+import { API_URL } from '../services/apis';
 
 const Card = ({ item, index }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-  const { isAuthenticated } = useAuth(); // Get authentication status from context
   const [isChecked, setIsChecked] = useState(false);
-  const [isUserExists, setIsUserExists] = useState(false); // State to track user existence
+  const [userId, setUserId] = useState(null);
 
-  // Check if userId exists in local storage
+  // Load userId from localStorage
   useEffect(() => {
-    const user = localStorage.getItem('userId');
-    setIsUserExists(user); // Set to true if user exists, false otherwise
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
   }, []);
 
-  // Load initial state from local storage
+  // Load initial favorite status
   useEffect(() => {
-    const storedState = JSON.parse(localStorage.getItem('checkedItems')) || [];
-    setIsChecked(storedState.includes(item._id));
-  }, [item._id]);
+    const fetchFavorites = async () => {
+      if (userId) {
+        try {
+          const response = await axios.get(`${API_URL}/api/favorites/${userId}`);
+          setIsChecked(response.data.includes(item._id));
+        } catch (error) {
+          console.error('Error fetching favorite items:', error);
+        }
+      }
+    };
 
-  // Handle checkbox change
-  const handleCheckboxChange = () => {
-    const user = localStorage.getItem('userId');
-    
-    if (!isAuthenticated || !user) {
-      console.warn('User is not authenticated or logged in.');
-      return; // Prevent further action if the user is not authenticated
+    fetchFavorites();
+  }, [userId, item._id]);
+
+  // Handle checkbox toggle
+  const handleCheckboxChange = async () => {
+    if (!userId) {
+      console.warn('User ID not found in localStorage.');
+      return;
     }
 
-    const storedState = JSON.parse(localStorage.getItem('checkedItems')) || [];
-    let updatedState;
+    try {
+      if (isChecked) {
+        await axios
+          .post(`${API_URL}/favorite/remove`, {
+            userId,
+            itemId: item._id,
+          })
+          .then((response) => {
+            toast.success(response.data.message);
+          })
+          .catch((error) => {
+            toast.warning(error.response?.data?.message || 'Something went wrong');
+          });
+      } else {
+        await axios
+          .post(`${API_URL}/favorite/add`, {
+            userId,
+            itemId: item._id,
+          })
+          .then((response) => {
+            toast.success(response.data.message);
+          })
+          .catch((error) => {
+            toast.warning(error.response?.data?.message || 'Something went wrong');
+          });
+      }
 
-    if (isChecked) {
-      // Remove the ID if unchecked
-      updatedState = storedState.filter((id) => id !== item._id);
-    } else {
-      // Add the ID if checked
-      updatedState = [...storedState, item._id];
+      setIsChecked(!isChecked);
+    } catch (error) {
+      console.error('Error updating favorite items:', error);
     }
-
-    // Update local storage
-    localStorage.setItem('checkedItems', JSON.stringify(updatedState));
-    setIsChecked(!isChecked);
-
   };
 
   return (
     <div>
       <ul
-        className="bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg border-4  p-5 border-sky-100 rounded-2xl"
+        className="bg-white bg-opacity-20 backdrop-blur-lg drop-shadow-lg border-4 p-5 border-sky-100 rounded-2xl"
         key={index}
       >
         <li className="text-3xl text-[#fc7f3f] py-3 flex justify-between">
@@ -60,19 +86,17 @@ const Card = ({ item, index }) => {
           <Checkbox
             {...label}
             icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
+            checkedIcon={<Favorite sx={{ color: '#2196f3' }} />}
             checked={isChecked}
             onChange={handleCheckboxChange}
-            disabled={!isAuthenticated || !isUserExists} // Disable if user isn't authenticated or doesn't exist
-            title='Add to favourite'
+            title="Add to favourite"
           />
         </li>
-        <li className='text-[#ffff83]'>{item.category}</li>
+        <li className="text-[#ffff83]">{item.category}</li>
         <li className="py-3 text-[#ffffff]">{item.desc}</li>
-        <a href={`${item.url}`} target="_blank" title='website links' rel="noopener noreferrer">
-          <li className="py-3 text-[#78fdff] text-2xl">Visit webiste</li>
+        <a href={item.url} target="_blank" rel="noopener noreferrer">
+          <li className="py-3 text-[#78fdff] text-2xl">Visit website</li>
         </a>
-      
       </ul>
     </div>
   );
