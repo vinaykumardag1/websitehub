@@ -3,7 +3,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import axios from 'axios';
-import { toast } from 'react-toastify'; // No ToastContainer here
+import { toast } from 'react-toastify';
 import { API_URL } from '../services/apis';
 
 const Card = ({ item, index }) => {
@@ -11,7 +11,6 @@ const Card = ({ item, index }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [userId, setUserId] = useState(null);
 
-  // Load userId from localStorage
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
     if (storedUserId) {
@@ -19,23 +18,22 @@ const Card = ({ item, index }) => {
     }
   }, []);
 
-  // Load initial favorite status
   useEffect(() => {
     const fetchFavorites = async () => {
-      if (userId) {
-        try {
-          const response = await axios.get(`${API_URL}/api/favorites/${userId}`);
-          setIsChecked(response.data.includes(item._id));
-        } catch (error) {
-          console.error('Error fetching favorite items:', error);
-        }
+      if (!userId) return;
+
+      try {
+        // ✅ Fixed the double /api issue
+        const response = await axios.get(`${API_URL}/favorites/${userId}`);
+        setIsChecked(response.data.includes(item._id));
+      } catch (error) {
+        // console.error('Error fetching favorite items:', error);
       }
     };
 
     fetchFavorites();
   }, [userId, item._id]);
 
-  // Handle checkbox toggle
   const handleCheckboxChange = async () => {
     if (!userId) {
       console.warn('User ID not found in localStorage.');
@@ -44,34 +42,23 @@ const Card = ({ item, index }) => {
 
     try {
       if (isChecked) {
-        await axios
-          .post(`${API_URL}/favorite/remove`, {
-            userId,
-            itemId: item._id,
-          })
-          .then((response) => {
-            toast.success(response.data.message);
-          })
-          .catch((error) => {
-            toast.warning(error.response?.data?.message || 'Something went wrong');
-          });
+        await axios.post(`${API_URL}/favorite/remove`, {
+          userId,
+          itemId: item._id,
+        });
+        toast.success('Removed from favorites');
       } else {
-        await axios
-          .post(`${API_URL}/favorite/add`, {
-            userId,
-            itemId: item._id,
-          })
-          .then((response) => {
-            toast.success(response.data.message);
-          })
-          .catch((error) => {
-            toast.warning(error.response?.data?.message || 'Something went wrong');
-          });
+        await axios.post(`${API_URL}/favorite/add`, {
+          userId,
+          itemId: item._id,
+        });
+        toast.success('Added to favorites');
       }
 
       setIsChecked(!isChecked);
     } catch (error) {
       console.error('Error updating favorite items:', error);
+      toast.error(error.response?.data?.message || 'Something went wrong');
     }
   };
 
